@@ -1,0 +1,12 @@
+---
+- hosts: web_servers
+  tasks:
+    - name: Pull Docker Image
+      command: docker pull your-dockerhub-username/your-image-name:latest
+
+    - name: Stop Existing Container
+      command: docker stop web_container
+      ignore_errors: yes
+
+    - name: Start New Container
+      command: docker run --name web_container -d -p 5000:5000 your-dockerhub-username/your-image-name:latest
